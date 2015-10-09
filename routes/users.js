@@ -41,6 +41,36 @@ router.post('/register',function(req, res, next){
 		// Set a Default Image
 		var profileImageName = 'noimage.png';
 	}
+
+	// Form Validation
+	req.checkBody('name','Name field is required').notEmpty();
+	req.checkBody('email','Email field is required').notEmpty();
+	req.checkBody('email','Email not valid').isEmail();
+	req.checkBody('username','Username field is required').notEmpty();
+	req.checkBody('password','Password field is required').notEmpty();
+	req.checkBody('password2','Passwords do not match').equals(req.body.password);
+
+	// Check for errors
+	var errors = req.validationErrors();
+
+	if(errors){
+		res.render('register',{
+			errors: errors,
+			name: name,
+			email: email,
+			username: username,
+			password: password,
+			password2: password2
+		});
+	} else {
+		var newUser = new User({
+			name: name,
+			email: email,
+			username: username,
+			password: password,
+			profileimage: profileImageName
+		});
+	}
 });
 
 module.exports = router;
