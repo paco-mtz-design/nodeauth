@@ -81,6 +81,9 @@ router.post('/register',function(req, res, next){
 			console.log(user);
 		});
 
+		// Success Message
+		req.flash('success','You are now registered and may log in');
+
 		res.location('/');
 		res.redirect('/');
 	}
@@ -124,5 +127,6 @@ router.post('/login', passport.authenticate('local', {failureRedirect: '/users/l
 	req.flash('success', 'You are logged in');
 	res.redirect('/');
 });
+
 
 module.exports = router;
