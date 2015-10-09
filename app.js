@@ -3,7 +3,15 @@ var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
+var session = require('express-session');
+var passport = require('passport');
+var LocalStrategy = require('passport-local');
 var bodyParser = require('body-parser');
+var multer = require('multer');
+var flash = require('flash');
+var mongo = require('mogodb');
+var mongoose = require('mongoose');
+var db = mongoose.connection;
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
